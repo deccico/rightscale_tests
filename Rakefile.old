@@ -1,0 +1,23 @@
+#lint commands
+lint_command = "ruby-lint"
+
+#Directory dictionary where the key is the directory and the value how to 'lint' it 
+dirs = Hash.new
+dirs['ruby-lint'] = lint_command
+dirs['ruby-lint1'] = lint_command
+
+
+task :default => [:test]
+
+task :test do
+    failures = Array.new
+    dirs.keys.sort.each do |key| 
+       puts "Processing #{key}"
+       result = system("#{dirs[key]} #{key}") 
+       puts "result #{result} #{key}"
+       #if failures.include? key
+       #    puts "#{key} passed the lint verification!"
+       #end 
+    end
+end
+
